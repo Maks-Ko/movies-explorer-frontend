@@ -38,11 +38,55 @@
 
 .header__title {
     margin: 0 auto;
-    padding: 184px 0 224px 0;
+    padding: 326px 0 342px 0;
     max-width: 730px;
     font-weight: normal;
     font-size: 50px;
     line-height: 58px;
     text-align: center;
     color: #000000;
+}
+
+@media (max-width: 770px) {
+    .header__logo {
+        margin: 18px auto 18px 30px;
+    }
+
+    .header__title {
+        max-width: 630px;
+    }
+}
+
+@media (max-width: 530px) {
+    .header__button {
+        margin: 24px 14px 24px auto;
+        padding: 5px 12px;
+        font-size: 10px;
+    }
+
+    .header__title {
+        max-width: 320px;
+        font-size: 30px;
+        line-height: 39px;
+    }
+
+    .header__prelude {
+        background-size: 248px 284px;
+    }
+}
+
+@media (max-width: 400px) {
+    .header__logo {
+        margin: 18px auto 18px 14px;
+    }
+
+    .header__title {
+        padding: 207px 0 246px 0;
+        font-size: 30px;
+        line-height: 39px;
+    }
+
+    .header__prelude {
+        background-size: 248px 284px;
+    }
 }
