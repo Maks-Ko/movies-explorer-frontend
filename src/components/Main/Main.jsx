@@ -1,17 +1,16 @@
 import './Main.css';
 import Header from '../Header/Header';
-import NavTab from '../Main/NavTab';
+import NavTab from './NavTab';
+import AboutProject from './AboutProject';
 
 
 function Main() {
     return (
         <>
             <Header />
-            <NavTab />
             <main className="main">
-                <p>
-                    Отображается страница «О проекте»
-                </p>
+                <NavTab />
+                <AboutProject />
             </main>
         </>
 
