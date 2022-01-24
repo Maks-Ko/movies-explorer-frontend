@@ -2,6 +2,7 @@ import './Main.css';
 import Header from '../Header/Header';
 import NavTab from './NavTab';
 import AboutProject from './AboutProject';
+import Techs from './Techs';
 
 
 function Main() {
@@ -11,6 +12,7 @@ function Main() {
             <main className="main">
                 <NavTab />
                 <AboutProject />
+                <Techs />
             </main>
         </>
 

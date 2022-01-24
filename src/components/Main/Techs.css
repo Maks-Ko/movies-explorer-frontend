@@ -1,0 +1,142 @@
+.techs {
+    background-color: #F5F5F5;
+}
+
+.techs__title {
+    margin: 0;
+    padding: 110px 70px 23px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 27px;
+    color: #000000;
+}
+
+.techs__line {
+    margin: 0 70px 90px;
+    background-color: #000000;
+    height: 1px;
+    border: none;
+}
+
+.tech-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tech-block__title {
+    margin: 0 0 26px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 50px;
+    line-height: 58px;
+    text-align: center;
+    color: #000000;    
+}
+
+.tech-block__text {
+    margin: 0 0 100px;
+    max-width: 492px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    color: #000000;
+}
+
+.tech-block__elements {
+    margin: 0 0 100px;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(7, 90px);
+    gap: 10px;
+}
+
+.tech-block__element {
+    margin: 0;
+    padding: 21px 0 21px 0;
+    background-color: #E8E8E8;
+    border-radius: 10px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #000000
+}
+
+@media (max-width: 770px) {
+    .techs__title {
+        padding: 90px 50px 23px;
+    }
+
+    .techs__line {
+        margin: 0 50px 80px;
+    }
+
+    .tech-block__title {
+        margin: 0 0 22px;
+    }
+
+    .tech-block__text {
+        margin: 0 0 83px;
+        max-width: 460px;
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .tech-block__elements {
+        margin-bottom: 90px;
+        grid-template-columns: repeat(7, 84px);
+    }
+    
+    .tech-block__element {
+        font-size: 12px;
+        line-height: 15px;
+    }
+}
+
+@media (max-width: 700px) {
+    .tech-block__elements {
+        margin: 0 0 70px;
+        grid-template-columns: repeat(4, 90px);
+    }  
+
+}
+
+@media (max-width: 605px) {
+    .techs {
+        background-color: #FFFFFF;
+    }
+
+    .techs__title {
+        padding: 70px 18px 28px;
+        font-size: 22px;
+        line-height: 27px;
+    }
+
+    .techs__line {
+        margin: 0 18px 60px;
+    }
+
+    .tech-block__title {
+        margin: 0 0 24px;
+        font-size: 30px;
+        line-height: 36px;
+    }
+
+    .tech-block__text {
+        margin: 0 0 50px;
+        max-width: 292px;
+        font-size: 11px;
+        line-height: 16px;
+    }
+
+    .tech-block__elements {
+        margin: 0 0 70px;
+        grid-template-columns: repeat(2, 84px);
+    }    
+}
