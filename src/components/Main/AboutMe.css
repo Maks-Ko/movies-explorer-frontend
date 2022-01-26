@@ -1,0 +1,100 @@
+.abouth-me__title {
+    margin: 110px 70px 23px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 27px;
+    color: #000000;
+}
+
+.abouth-me__line {
+    margin: 0 70px 90px;
+    background-color: #000000;
+    height: 1px;
+    border: none;
+}
+
+.profile {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 70px 100px;
+}
+
+.profile__title {
+    margin: 0 0 18px;
+    font-weight: normal;
+    font-size: 50px;
+    line-height: 58px;
+    color: #000000;
+}
+
+.profile__profession {
+    margin: 0 0 26px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    color: #000000;
+}
+
+.profile__text {
+    margin: 0 0 99px;
+    max-width: 600px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    color: #000000;
+}
+
+.profile__link {
+    text-decoration: none;
+    margin: 0 20px 0 0;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+}
+
+.profile__photo {
+    width: 270px;
+    height: 327px;
+    border-radius: 10px;
+
+}
+
+.portfolio {
+    margin: 0 70px 125px;
+}
+
+.portfolio__title {
+    margin: 0 0 50px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 20px;
+    color: #A0A0A0;
+}
+
+.portfolio__link {
+    margin: 0 0 20px;
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    border-bottom: 1px solid #E8E8E8;
+}
+
+.portfolio__link-text {
+    margin: 0 0 19px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 50px;
+    color: #000000;
+}
+
+.portfolio__link-img {
+    width: 29px;
+    height: 60px
+}

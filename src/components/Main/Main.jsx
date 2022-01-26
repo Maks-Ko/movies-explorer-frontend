@@ -3,6 +3,7 @@ import Header from '../Header/Header';
 import NavTab from './NavTab';
 import AboutProject from './AboutProject';
 import Techs from './Techs';
+import AboutMe from './AboutMe';
 
 
 function Main() {
@@ -13,6 +14,7 @@ function Main() {
                 <NavTab />
                 <AboutProject />
                 <Techs />
+                <AboutMe />
             </main>
         </>
 
