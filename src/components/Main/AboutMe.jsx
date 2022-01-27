@@ -1,6 +1,5 @@
 import './AboutMe.css';
 import photo from '../../images/student.png';
-import arrow from '../../images/text__COLOR_font-main.svg';
 
 function AboutMe() {
     return (
@@ -15,26 +14,13 @@ function AboutMe() {
                         и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить.
                         С 2015 года работал в компании «СКБ Контур». После того, как прошёл курс по
                         веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.</p>
-                    <a className="profile__link" href='#'>Facebook</a>
-                    <a className="profile__link" href='#'>Github</a>
+                    <ul className="profile__list-links">
+                        <li><a className="profile__link" href='#'>Facebook</a></li>
+                        <li><a className="profile__link" href='#'>Github</a></li>
+                    </ul>
                 </div>
                 <img className="profile__photo" src={photo} alt="фото моего лица" />
-            </div>
-            <div className="portfolio">
-                <h3 className="portfolio__title">Портфолио</h3>
-                <a className="portfolio__link" href='#'>
-                    <p className="portfolio__link-text">Статичный сайт</p>
-                    <img className="portfolio__link-img" src={arrow} alt="стрелка" />
-                </a>
-                <a className="portfolio__link" href='#'>
-                    <p className="portfolio__link-text">Адаптивный сайт</p>
-                    <img className="portfolio__link-img" src={arrow} alt="стрелка" />
-                </a>
-                <a className="portfolio__link" href='#'>
-                    <p className="portfolio__link-text">Одностраничное приложение</p>
-                    <img className="portfolio__link-img" src={arrow} alt="стрелка" />
-                </a>
-            </div>
+            </div>            
         </section>
     )
 }
