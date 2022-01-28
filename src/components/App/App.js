@@ -1,3 +1,4 @@
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -8,14 +9,18 @@ import Login from '../Login/Login';
 import './App.css';
 
 function App() {
+  const [loggedIn, setLoggedIn] = React.useState(true);
+
   return (
     <div className="app">
       <Switch>
         <Route exact path='/'>
-          <Main />
+          <Main
+          loggedIn={loggedIn} />
         </Route>
         <Route path='/movies'>
-          <Movies />
+          <Movies
+          loggedIn={loggedIn} />
         </Route>
         <Route path='/saved-movies'>
           <SavedMovies />

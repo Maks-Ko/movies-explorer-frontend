@@ -1,11 +1,13 @@
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './NavTab.css';
 
 function NavTab() {
     return (
         <nav className="navtab">
-            <a href="#" className="navtab__link">О проекте</a>
-            <a href="#" className="navtab__link">Технологии</a>
-            <a href="#" className="navtab__link">Студент</a>
+            <NavLink to="/" className="navtab__link">О проекте</NavLink>
+            <NavLink to="/" className="navtab__link">Технологии</NavLink>
+            <NavLink to="/" className="navtab__link">Студент</NavLink>
         </nav>
     )
 }

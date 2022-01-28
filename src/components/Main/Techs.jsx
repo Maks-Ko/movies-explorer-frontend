@@ -1,7 +1,8 @@
+import React from 'react';
 import './Techs.css'
 
 function Techs() {
-    return(
+    return (
         <section className="techs">
             <h2 className="techs__title">Технологии</h2>
             <hr className="techs__line" />

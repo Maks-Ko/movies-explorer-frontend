@@ -1,11 +1,15 @@
-function Movies() {
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
+
+function Movies(props) {
     return (
         <>
-            <main className="main">
-                <p>
-                    Отображается страница «Фильмы»
-                </p>
-            </main>
+            <Header
+                loggedIn={props.loggedIn} />
+            <p>
+                Отображается страница «Фильмы»
+            </p>
+            {/* <Footer /> */}
         </>
     )
 }

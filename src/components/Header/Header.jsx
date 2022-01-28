@@ -1,14 +1,23 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
+import Navigation from '../Navigation/Navigation'
 import './Header.css';
 
-function Header() {
+function Header(props) {
     return (
-        <header className="header">
-            <img src={logo} alt="логотип" className="header__logo" />
-            <div className="header__navigation">
-                <button className="header__button">Регистрация</button>
-                <button className="header__button">Войти</button>
-            </div>
+        <header className={`header ${props.loggedIn ? "header__background" : ""}`}>
+            <Link to="/">
+                <img src={logo} alt="логотип" className="header__logo" />
+            </Link>
+            {props.loggedIn ?
+                <Navigation /> :
+                <nav className="header__navigation">
+                    <Link to="/signup" className="header__button">Регистрация</Link>
+                    <Link to="/signin" className="header__button">Войти</Link>
+                </nav>
+            }
+
         </header>
     )
 }
