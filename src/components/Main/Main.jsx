@@ -1,5 +1,6 @@
 import './Main.css';
 import Header from '../Header/Header';
+import Promo from './Promo';
 import NavTab from './NavTab';
 import AboutProject from './AboutProject';
 import Techs from './Techs';
@@ -12,6 +13,7 @@ function Main() {
         <>
             <Header />
             <main className="main">
+                <Promo />
                 <NavTab />
                 <AboutProject />
                 <Techs />
