@@ -30,5 +30,40 @@
 
 .portfolio__link-img {
     width: 29px;
-    height: 60px
+    height: 60px;
+}
+
+@media (max-width: 770px) {
+    .portfolio {
+        margin: 0 50px 90px;
+    }
+    
+    .portfolio__link-text {
+        font-size: 28px;
+    }
+
+    .portfolio__link-img {
+        width: 27px;
+    }
+}
+
+@media (max-width: 605px) {
+    .portfolio {
+        margin: 0 14px 70px;
+    }
+
+    .portfolio__title {
+        margin: 0 0 40px;
+        font-size: 14px;
+    }
+
+    .portfolio__link-text {
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    .portfolio__link-img {
+        width: 18px;
+        height: 28px;
+    }
 }
