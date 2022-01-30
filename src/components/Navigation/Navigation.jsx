@@ -3,22 +3,24 @@ import { NavLink } from 'react-router-dom';
 
 import './Navigation.css'
 import account from '../../images/icon__account.svg';
-import dropbtn from '../../images/icon__menu.svg';
+import menu from '../../images/icon-main.svg';
 
 function Navigation(props) {
     return (
         <>
             <nav className="navigation">
                 <div>
-                    <NavLink to="" className="navigation__button">Фильмы</NavLink>
-                    <NavLink to="" className="navigation__button">Сохранённые фильмы</NavLink>
+                    <NavLink exact to="/movies" className="navigation__button">Фильмы</NavLink>
+                    <NavLink to="/saved-movies" className="navigation__button">Сохранённые фильмы</NavLink>
                 </div>
-                <NavLink to="" className="navigation__button navigation__button_account">
+                <NavLink to="/profile" className="navigation__button navigation__button_account">
                     <p className="text">Аккаунт</p>
                     <div className="img-account"><img className="img" src={account} alt="аккаунт" /></div>
                 </NavLink>
             </nav>
-            <button className="dropbtn">&#9776;</button>
+            <button className="dropbtn">
+                <img src={menu} alt="меню" />
+            </button>
         </>
     )
 }
