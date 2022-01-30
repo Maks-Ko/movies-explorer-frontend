@@ -1,20 +1,21 @@
 .searh-form {
-    max-width: 1280px;
-    margin: 18px auto 70px;
+    margin: 0 70px 70px;
 }
+
 .form {
-    margin: 70px 70px 33px;
+    margin: 0 0 30px;
 }
 
 .form__elements {
     padding: 0 0 13px;
     border: none;
-    border-bottom: solid 1px #E8E8E8;    
+    border-bottom: solid 1px #E8E8E8;
     display: flex;
     justify-content: space-between;
 }
 
 .form__movie {
+    width: 100%;
     border: none;
     flex-grow: 1;
     font-style: normal;
@@ -33,7 +34,34 @@
 
 .form__button {
     padding: 0;
+    width: 34px;
+    height: 34px;
     border: none;
     border-radius: 100%;
     cursor: pointer;
+}
+
+@media (max-width: 770px) {
+    .searh-form {
+        margin: 0 30px 50px;
+    }
+}
+
+@media (max-width: 400px) {
+    .searh-form {
+        margin: 0 14px 40px;
+    }
+
+    .form {
+        margin: 0 0 40px;
+    }
+
+    .form__elements {
+        padding: 0 0 15px;
+    }
+
+    .form__movie {
+        font-size: 18px;
+        line-height: 22px;
+    }
 }

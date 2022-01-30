@@ -6,3 +6,17 @@
     gap: 37px 24px;
     justify-content: center;
 }
+
+@media (max-width: 770px) {
+    .movies-list {
+        grid-template-columns: repeat(auto-fill, 339px);
+        gap: 30px;
+    }
+}
+
+@media (max-width: 400px) {
+    .movies-list {
+        grid-template-columns: repeat(auto-fill, 300px);
+        gap: 14px;
+    }
+}

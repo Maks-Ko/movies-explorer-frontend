@@ -1,5 +1,6 @@
 .checkbox {
-	margin: 0 70px 47px;
+	margin: 0;
+	padding-bottom: 60px;
     display: flex;
     align-items: center;
 }
@@ -70,4 +71,26 @@
 .checkbox__label input[type="checkbox"]:not(:disabled) + .checkbox__label-switch {
 	cursor: pointer;
 	border-color: rgba(0, 0, 0, .3);
+}
+
+@media (max-width: 770px) {
+    .checkbox {
+		flex-direction: row-reverse;
+	}
+
+	.checkbox__label {
+		margin-right: 0;
+		margin-left: 15px;
+	}
+}
+
+@media (max-width: 400px) {
+    .checkbox {
+		padding-bottom: 50px;
+		justify-content: center;
+	}
+
+	.checkbox__text {
+		font-size: 11px;
+	}
 }
