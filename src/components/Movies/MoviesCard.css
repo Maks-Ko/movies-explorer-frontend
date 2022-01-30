@@ -33,22 +33,36 @@
     color: #000000;
 }
 
-.card__likes {
+.card__button {
+    display: none;
     margin-right: 8px;
-    width: 14px;
-    height: 12px;
+    width: 30px;
+    height: 30px;
     border: none;
-    background-image: url(../../images/like.svg);
+    background-image: none;
     background-color: #FDFDFD;
     background-repeat: no-repeat;
     background-size: 14px 12px;
+    background-position: center;
 }
 
-.card__likes_active {
+.button__activ {
+    display: inline;
+}
+
+.card__button_status_like {
+    background-image: url(../../images/like.svg);
+}
+
+.card__button_status_like-active {
     background-image: url(../../images/like_active.svg);
 }
 
-.card__likes:hover {
+.card__button_status_close {
+    background-image: url(../../images/cross.svg);
+}
+
+.card__button:hover {
     cursor: pointer;
 }
 

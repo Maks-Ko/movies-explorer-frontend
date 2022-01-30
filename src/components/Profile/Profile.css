@@ -1,0 +1,128 @@
+.account {
+    max-width: 1280px;
+    margin: 74px auto 70px;
+}
+
+.account__title {
+    margin: 0 0 123px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    color: #000000;
+}
+
+.form__account-container {
+    max-width: 410px;
+    margin: 0 auto;
+    padding: 0;
+    border: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.form__account-span {
+    margin-bottom: 16px;
+    display: inline-flex;
+    justify-content: space-between;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+    color: #000000;
+}
+
+.form__account-text {
+    padding: 0;
+    border: none;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 13px;
+    text-align: right;
+    color: #000000;
+}
+
+.form__account-text:focus {    
+    width: 250px;
+    outline: 0;
+    border: solid 1px #E8E8E8;
+    border-radius: 5px;
+}
+
+.form__account-span:last-child {
+    margin-bottom: 0;
+
+}
+
+.form__account-line {
+    margin: 0 auto 17px;
+    width: 410px;
+    height: 1px;
+    background: #E8E8E8;
+    border: none;
+}
+
+.form__account-button {
+    margin-top: 220px;
+    border: none;
+    background-color: #FFFFFF;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 16px;
+    color: #000000;
+    cursor: pointer;
+}
+
+.account__button {
+    display: block;
+    margin: 16px auto 0;
+    padding: 0;
+    border: none;    
+    background-color: #FFFFFF;font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: center;    
+    color: #FF4062;
+    cursor: pointer;
+}
+
+@media (max-width: 770px) {
+    .account {
+        margin: 236px auto 269px;
+    }
+
+    .account__title {
+        margin-bottom: 96px;
+    }
+    
+    .form__account-button {
+        margin-top: 210px;
+    }
+}
+
+@media (max-width: 500px) {
+    .account {
+        margin: 70px auto 40px;
+    }
+
+    .account__title {
+        margin-bottom: 80px;
+    }
+
+    .form__account-container {
+        max-width: 260px;
+    }
+
+    .form__account-line {
+        width: 260px;
+    }
+
+    .form__account-button {
+        margin-top: 379px;
+    }
+
+    
+}

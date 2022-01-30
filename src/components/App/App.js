@@ -9,24 +9,28 @@ import Login from '../Login/Login';
 import './App.css';
 
 function App() {
-  const [loggedIn, setLoggedIn] = React.useState(true);
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
   return (
     <div className="app">
       <Switch>
         <Route exact path='/'>
           <Main
-          loggedIn={loggedIn} />
+            loggedIn={loggedIn} />
         </Route>
         <Route path='/movies'>
           <Movies
-          loggedIn={loggedIn} />
+            loggedIn={true}
+            like={true ? "button__activ" : ""} />
         </Route>
         <Route path='/saved-movies'>
-          <SavedMovies />
+          <SavedMovies
+            loggedIn={true}
+            close={true ? "button__activ" : ""} />
         </Route>
         <Route path='/profile'>
-          <Profile />
+          <Profile
+            loggedIn={true} />
         </Route>
         <Route path='/signin'>
           <Login />

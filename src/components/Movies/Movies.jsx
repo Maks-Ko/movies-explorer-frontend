@@ -10,12 +10,12 @@ function Movies(props) {
         <>
             <Header
                 loggedIn={props.loggedIn} />
-            
             <main className="movies">
                 <SearhForm />
-                <MoviesCardList />
+                <MoviesCardList
+                    like={props.like} />
                 <Preloader />
-            </main>            
+            </main>
             <Footer />
         </>
     )
