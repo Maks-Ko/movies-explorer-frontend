@@ -2,8 +2,9 @@ import Header from "../Header/Header";
 import SearhForm from "./SearchForm";
 import Footer from "../Footer/Footer";
 import MoviesCardList from "./MoviesCardList";
-import Preloader from "./Preloader";
+import PreloaderMore from "./PreloaderMore";
 import './Movies.css';
+
 
 function Movies(props) {
     return (
@@ -14,7 +15,7 @@ function Movies(props) {
                 <SearhForm />
                 <MoviesCardList
                     like={props.like} />
-                <Preloader />
+                <PreloaderMore />
             </main>
             <Footer />
         </>

@@ -12,13 +12,13 @@ function Register() {
                 linkText="Войти"
             >
                 <span for="user_name" className="form__text-span">Имя</span>
-                <input id="user_name" name="user_name" type="text" className="form__text-input" />
+                <input id="user_name" name="user_name" type="text" className="form__text-input" placeholder="Имя" requiredminlength="2" maxLength="40" />
 
                 <span for="email" className="form__text-span">E-mail</span>
-                <input id="email" name="email" type="email" className="form__text-input" />
+                <input id="email" name="email" type="email" className="form__text-input" placeholder="E-mail" requiredminlength="2" maxLength="40" />
 
                 <span for="password" className="form__text-span">Пароль</span>
-                <input id="password" name="password" type="password" className="form__text-input" />
+                <input id="password" name="password" type="password" className="form__text-input" placeholder="Имя" requiredminlength="2" maxLength="20" />
             </PageWithForm>
         </>
     )
