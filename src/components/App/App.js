@@ -45,7 +45,7 @@ function App() {
         </Route>
       </Switch>
       <PopupWithNavigation
-      isOpen={false ? "popup_is-opened" : ""} />
+      isOpen={true ? "popup_is-opened" : ""} />
     </div>
   );
 }
