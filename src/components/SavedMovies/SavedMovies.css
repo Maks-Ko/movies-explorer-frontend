@@ -1,0 +1,14 @@
+.saved-movies {
+    max-width: 1280px;
+    margin: 70px auto 0;
+}
+
+.saved-movies__block {
+    min-height: 140px;
+}
+
+@media (max-width: 770px) {
+    .saved-movies {
+        margin-top: 80px;
+    }
+}

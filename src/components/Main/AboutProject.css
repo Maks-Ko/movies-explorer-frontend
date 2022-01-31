@@ -1,0 +1,147 @@
+.project__title {
+    margin: 110px 70px 23px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 27px;
+    color: #000000;
+}
+
+.project__line {
+    margin: 0 70px 70px;
+    background-color: #000000;
+    height: 1px;
+    border: none;
+}
+
+.description {
+    margin: 0 70px 110px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(2, min-content);
+    grid-auto-flow: column;
+    column-gap: 40px;
+    row-gap: 26px;
+}
+
+.description__title {
+    margin: 0;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+}
+
+.description__text {
+    margin: 0;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    color: #000000;
+}
+
+.tracker {
+    margin: 0 70px 110px;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: repeat(2, min-content);
+    grid-auto-flow: column;
+    justify-items: stretch;
+    row-gap: 5px;
+}
+
+.tracker__text {
+    margin: 0;
+    padding: 9px 0;   
+    font-style: normal;
+    font-weight: 500px;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #A0A0A0;
+}
+
+.tracker__text_color_white {
+    font-weight: normal;
+    color: #FFFFFF;
+    background-color: #000000;
+}
+
+.tracker__text_color_black {
+    font-weight: normal;
+    color: #000000;
+    background-color: #F2F2F2;
+}
+
+@media (max-width: 770px) {
+    .project__title {
+        margin: 90px 50px 23px;
+    }
+
+    .project__line {
+        margin: 0 50px 70px;
+    }
+
+    .description {
+        margin: 0 50px 93px;
+        column-gap: 30px;
+        row-gap: 22px;
+    }
+
+    .description__text {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .tracker {
+        margin: 0 50px 90px;
+    }
+}
+
+@media (max-width: 605px) {
+    .project__title {
+        margin: 70px 18px 28px;
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .project__line {
+        margin: 0 18px 60px;
+    }
+
+    .description {
+        margin: 0 18px 20px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: min-content;
+        grid-auto-flow: row;
+        row-gap: 16px;
+    }
+
+    .description__title {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .description__text {
+        margin: 0 0 40px;
+        font-size: 11px;
+        line-height: 16px;
+        color: #000000;
+    }
+
+    .tracker {
+        margin: 0 18px 60px;
+        row-gap: 0;
+    }
+
+    .tracker__text {
+        margin: 0;
+        padding: 11px 0;
+        font-weight: normal;
+        font-size: 11px;
+        line-height: 13px;
+    }
+}

@@ -1,0 +1,118 @@
+.page-form {
+    margin: 0 auto;
+    max-width: 396px;
+}
+
+.page-form__logo {
+    width: 38px;
+    height: 38px;
+    margin: 70px 0 40px;
+}
+
+.page-form__title {
+    margin: 0 0 40px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+}
+
+.form__container {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.form__text-span {
+    margin-bottom: 10px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 12px;
+    color: #A0A0A0;    
+}
+
+.form__text-input {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: none;
+    background: #F9F9F9;
+    border-radius: 8px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 16px;
+    color: #000000;
+}
+
+.form__button {
+    margin: 70px 0 16px;
+    padding: 13px 0 15px;
+    background-color: #000000;
+    border: none;
+    border-radius: 3px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.page-form__text {
+    margin: 0 0 70px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #A0A0A0;
+}
+
+.page-form__linl {
+    text-decoration: none;
+    margin-left: 6px;
+    color: #000000;
+}
+
+@media (max-width: 770px) {
+    .page-form__logo {
+        margin-top: 232px;
+    }
+
+    .page-form__text {
+        margin-bottom: 232px;
+    }
+}
+
+@media (max-width: 500px) {
+    .page-form {
+        max-width: 260px;
+    }
+
+    .page-form__logo {
+        margin: 56px auto 50px;
+        display: block;
+    }
+
+    .page-form__title {
+        margin-bottom: 80px;
+        text-align: center;
+    }
+
+    .form__button {
+        margin: 158px 0 14px;
+        padding: 15px 0 15px;
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+    .page-form__text {
+        font-size: 12px;
+        line-height: 15px;
+        margin-bottom: 30px;
+    }
+}
