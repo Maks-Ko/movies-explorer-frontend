@@ -10,10 +10,10 @@ function Navigation(props) {
         <>
             <nav className="navigation">
                 <div>
-                    <NavLink exact to="/movies" className="navigation__button">Фильмы</NavLink>
-                    <NavLink to="/saved-movies" className="navigation__button">Сохранённые фильмы</NavLink>
+                    <NavLink exact to="/movies" activeClassName="navigation__link_active" className="navigation__link">Фильмы</NavLink>
+                    <NavLink to="/saved-movies" activeClassName="navigation__link_active" className="navigation__link">Сохранённые фильмы</NavLink>
                 </div>
-                <NavLink to="/profile" className="navigation__button navigation__button_account">
+                <NavLink to="/profile" activeClassName="navigation__link_active" className="navigation__link navigation__link_account">
                     <p className="text">Аккаунт</p>
                     <div className="img-account"><img className="img" src={account} alt="аккаунт" /></div>
                 </NavLink>

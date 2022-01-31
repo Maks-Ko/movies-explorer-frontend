@@ -33,6 +33,11 @@
     color: #000000;
 }
 
+.popup__link_active {
+    padding-bottom: 4px;
+    border-bottom: solid 2px #000000;
+}
+
 .popup__link-account {
     margin-top: calc(100vh - 390px);
     display: flex;

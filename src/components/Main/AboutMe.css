@@ -53,7 +53,7 @@
 }
 
 .profile__list-links {
-    margin: auto 0 0;
+    margin: 20px 0 0;
     padding: 0;
     list-style: none;
     display: flex;
@@ -71,6 +71,7 @@
 
 .profile__photo {
     max-width: 270px;
+    height: 100%;
     border-radius: 10px;
 }
 

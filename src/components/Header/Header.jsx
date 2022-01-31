@@ -13,8 +13,8 @@ function Header(props) {
             {props.loggedIn ?
                 <Navigation /> :
                 <nav className="header__navigation">
-                    <Link to="/signup" className="header__button">Регистрация</Link>
-                    <Link to="/signin" className="header__button">Войти</Link>
+                    <Link to="/signup" className="header__link">Регистрация</Link>
+                    <Link to="/signin" className="header__link">Войти</Link>
                 </nav>
             }
 
