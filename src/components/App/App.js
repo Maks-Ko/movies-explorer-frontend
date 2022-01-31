@@ -7,6 +7,7 @@ import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import PopupWithNavigation from '../PopupWithNavigation/PopupWithNavigation';
 import './App.css';
 
 function App() {
@@ -43,6 +44,8 @@ function App() {
           <PageNotFound />
         </Route>
       </Switch>
+      <PopupWithNavigation
+      isOpen={false ? "popup_is-opened" : ""} />
     </div>
   );
 }
