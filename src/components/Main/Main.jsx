@@ -13,7 +13,7 @@ function Main(props) {
     return (
         <>
             <Header
-                loggedIn={props.loggedIn} />
+                headerBackground={props.headerBackground} />
             <main className="main">
                 <Promo />
                 <NavTab />

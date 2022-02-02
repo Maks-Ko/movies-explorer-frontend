@@ -22,7 +22,7 @@ function Profile(props) {
                         <button type="submit" className="form__account-button">Редактировать</button>
                     </fieldset>
                 </form>
-                <button className="account__button">Выйти из аккаунта</button>
+                <button onClick={props.onLogout} className="account__button">Выйти из аккаунта</button>
             </main>
         </>
     )

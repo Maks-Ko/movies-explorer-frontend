@@ -56,11 +56,10 @@ function App() {
       })
   };
 
-  // авторизация на сервере
+  // авторизация в приложении
   function handleLogin({ email, password }) {
     mainApi.authUser({ email, password })
       .then((user) => {
-        console.log(user);
         localStorage.setItem('jwt', user.token);
         setLoggedIn(true)
       })
@@ -76,7 +75,6 @@ function App() {
     if (jwt) {
       mainApi.getToken({ jwt })
         .then((user) => {
-          console.log(user.data);
           setCurrentUser(user.data);
           setLoggedIn(true);
         })
@@ -85,6 +83,14 @@ function App() {
         });
     }
   };
+
+  // выход из приложения
+  function handleLogout() {
+    localStorage.removeItem('jwt');
+    setLoggedIn(false);
+  }
+
+
 
   useEffect(() => {
     if (loggedIn) {
@@ -115,9 +121,9 @@ function App() {
   return (
     <div className="app">
       <Switch>
-        <Route exact path='/'>
+        <Route exact path='/'>          
           <Main
-            loggedIn={loggedIn} />
+            headerBackground={'header__background'} />
         </Route>
         <Route path='/signin'>
           <Login
@@ -148,6 +154,7 @@ function App() {
           component={Profile}
           path='/profile'
           loggedIn={loggedIn}
+          onLogout={handleLogout}
         />
         <Route path='/not-found'>
           <PageNotFound />

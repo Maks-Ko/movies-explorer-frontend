@@ -6,7 +6,7 @@ import './Header.css';
 
 function Header(props) {
     return (
-        <header className={`header ${props.loggedIn ? "header__background" : ""}`}>
+        <header className={`header ${props.headerBackground }`}>
             <Link to="/">
                 <img src={logo} alt="логотип" className="header__logo" />
             </Link>

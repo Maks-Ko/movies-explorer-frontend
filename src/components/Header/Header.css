@@ -2,14 +2,14 @@
     max-width: 1280px;
     min-height: 74px;
     margin: 0 auto;
-    background-color: #F3C1F8;
+    background-color: #FFFFFF;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .header__background {
-    background-color: white;
+    background-color: #F3C1F8;
 }
 
 .header__logo {
