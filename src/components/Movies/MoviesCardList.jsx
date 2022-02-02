@@ -7,24 +7,15 @@ function MoviesCardList(props) {
         <section>
             <Preloader />
             <ul className="movies-list">
-                <MoviesCard
+                {props.cards.map(card => {return(
+                    <MoviesCard
+                    nameRu={card.nameRU}
+                    duration={card.duration}
+                    image={card.image.url}
                     like={props.like}
                     close={props.close} />
-                <MoviesCard
-                    like={props.like}
-                    close={props.close} />
-                <MoviesCard
-                    like={props.like}
-                    close={props.close} />
-                <MoviesCard
-                    like={props.like}
-                    close={props.close} />
-                <MoviesCard
-                    like={props.like}
-                    close={props.close} />
-                <MoviesCard
-                    like={props.like}
-                    close={props.close} />
+                )})}
+                
             </ul>
         </section>
 

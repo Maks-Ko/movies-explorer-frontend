@@ -12,6 +12,7 @@ function SavedMovies(props) {
             <main className="saved-movies">
                 <SearhForm />
                 <MoviesCardList
+                    cards={props.cards}
                     close={props.close} />
                 <div className="saved-movies__block"></div>
             </main>

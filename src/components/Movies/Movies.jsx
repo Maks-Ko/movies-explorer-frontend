@@ -12,9 +12,11 @@ function Movies(props) {
             <Header
                 loggedIn={props.loggedIn} />
             <main className="movies">
-                <SearhForm />
+                <SearhForm
+                    onUpdateParams={props.onUpdateParams} />
                 <MoviesCardList
-                    like={props.like} />
+                    like={props.like}
+                    cards={props.cards} />
                 <PreloaderMore />
             </main>
             <Footer />
