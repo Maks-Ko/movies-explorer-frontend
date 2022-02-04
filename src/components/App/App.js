@@ -16,7 +16,8 @@ import mainApi from '../../utils/MainApi';
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isRegister, setIsRegister] = useState('');
-  const [errResponsMainApi, setErrResponsMainApi] = useState('');
+  const [errResEmail, setErrResEmail] = useState('');
+  const [errResIncorrect, setErrResIncorrect] = useState('');
   const [currentUser, setCurrentUser] = useState({});
 
   
@@ -51,7 +52,7 @@ function App() {
         setIsRegister(true);
       })
       .catch((err) => {
-        setErrResponsMainApi(err);
+        setErrResEmail(err);
         console.log(err);
       })
   };
@@ -64,6 +65,7 @@ function App() {
         setLoggedIn(true)
       })
       .catch((err) => {
+        setErrResIncorrect(err)
         console.log(err);
       })
   };
@@ -128,12 +130,13 @@ function App() {
         <Route path='/signin'>
           <Login
           onLogin={handleLogin}
-          tokenCheck={tokenCheck} />
+          tokenCheck={tokenCheck}
+          errRespons={errResIncorrect} />
         </Route>
         <Route path='/signup'>
           <Register
             onRegister={handleRegister}
-            errRespons={errResponsMainApi} />
+            errRespons={errResEmail} />
         </Route>
         <ProtectedRoute
           component={Movies}

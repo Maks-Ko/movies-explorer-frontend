@@ -57,15 +57,15 @@ function Register(props) {
     }, [setFormValues]);
 
     const handleClickInputUserName = () => {
-        setIsClickInput({userName: true});
+        setIsClickInput({ userName: true });
     };
 
     const handleClickInputEmail = () => {
-        setIsClickInput({email: true});
+        setIsClickInput({ email: true });
     }
 
     const handleClickInputPassword = () => {
-        setIsClickInput({password: true});
+        setIsClickInput({ password: true });
     }
 
     useEffect(function validateInput() {
@@ -112,7 +112,7 @@ function Register(props) {
     function handleSubmit(e) {
         e.preventDefault();
         const { userName, email, password } = formValues;
-        props.onRegister({ userName, email, password });       
+        props.onRegister({ userName, email, password });
     }
 
     return (
@@ -126,7 +126,6 @@ function Register(props) {
                 onSubmit={handleSubmit}
                 isSubmitDisabled={isSubmitDisabled}
                 isbuttonDisabled={isSubmitDisabled ? "form__button_is-disabled" : ""}
-                errRespons={props.errRespons}
             >
                 <span htmlFor="userName" className="form__text-span">Имя</span>
                 <input id="userName" name="userName" type="text" value={userName || ''} onChange={handleInputChange} onClick={handleClickInputUserName} className="form__text-input" placeholder="Имя" requiredminlength="2" maxLength="40" />
@@ -148,6 +147,10 @@ function Register(props) {
                 <div className="form__block-errors">
                     {errors.password.required && isClickInput.password && <span className="form__text-error">Обязетельное поле.</span>}
                     {errors.password.minlength && isClickInput.password && <span className="form__text-error">Минимальная длинна 10 символа.</span>}
+                </div>
+
+                <div className="form__block-errors_button">
+                    {props.errRespons && <span className="form__text-error form__text-error_button">{`${props.errRespons}` === 'Ошибка: 409' ? 'Пользователь с таким email уже существует' : 'Что-то пошло не так, попробуйте по позже'}</span>}
                 </div>
             </PageWithForm>
         </>

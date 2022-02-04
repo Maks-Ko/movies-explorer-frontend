@@ -49,7 +49,7 @@
 }
 
 .form__button {
-    /* margin: 70px 0 16px; */
+    margin: 0 0 16px;
     padding: 13px 0 15px;
     background-color: #000000;
     border: none;
