@@ -42,6 +42,19 @@ class MainApi {
             .then(this._checkResponse)
     }
 
+    // редактирование профиля
+    updateUser(dataUser) {
+        return fetch(`${this._baseUrl}/users/me`, {
+            method: 'PATCH',
+            headers: { ...this._headers, Authorization: `Bearer ${localStorage.getItem('jwt')}` },
+            body: JSON.stringify({
+                name: dataUser.name,
+                email: dataUser.email,
+            })
+        })
+            .then(this._checkResponse)
+    }
+
     // получить данные сохраненных фильмов
     getItemsMovies() {
         return fetch(`${this._baseUrl}/movies`, {

@@ -34,7 +34,7 @@
 }
 
 .form__account-text {
-    padding: 0;
+    padding: 5px 5px 5px 0;
     border: none;
     font-style: normal;
     font-weight: normal;
@@ -56,6 +56,21 @@
 
 }
 
+.form__block-err {
+    display: flex;
+    justify-content: end;
+}
+
+.form__text-err {
+    margin: 0 0 10px 5px;
+    text-align: left;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 12px;
+    color: #FF4062;
+}
+
 .form__account-line {
     margin: 0 auto 17px;
     width: 410px;
@@ -73,6 +88,11 @@
     line-height: 16px;
     color: #000000;
     cursor: pointer;
+}
+
+.form__account-button_is-disabled {
+    color: #E8E8E8;
+    cursor: auto;
 }
 
 .account__button {

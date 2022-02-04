@@ -12,6 +12,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './App.css';
 import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -20,15 +21,15 @@ function App() {
   const [errResIncorrect, setErrResIncorrect] = useState('');
   const [currentUser, setCurrentUser] = useState({});
 
-  
+
   const [cards, setCards] = useState([]);
   const [savedCards, setSavedCards] = useState([]);
   const [local, setLocal] = useState([]); // переделать на localStorage
- 
- 
+
+
   const history = useHistory();
 
-  
+
   useEffect(() => {
     if (isRegister === true) {
       history.push('/signin');
@@ -86,6 +87,18 @@ function App() {
     }
   };
 
+  // редактировать профиль
+  function handleUpdateUser({ name, email }) {    
+    mainApi.updateUser({ name, email })
+      .then((user) => {
+        setCurrentUser(user.data);
+      })
+      .catch((err) => {
+        setErrResIncorrect(err);
+        console.log(err); // "Что-то пошло не так: ..."
+      });
+  }
+
   // выход из приложения
   function handleLogout() {
     localStorage.removeItem('jwt');
@@ -122,49 +135,53 @@ function App() {
 
   return (
     <div className="app">
-      <Switch>
-        <Route exact path='/'>          
-          <Main
-            headerBackground={'header__background'} />
-        </Route>
-        <Route path='/signin'>
-          <Login
-          onLogin={handleLogin}
-          tokenCheck={tokenCheck}
-          errRespons={errResIncorrect} />
-        </Route>
-        <Route path='/signup'>
-          <Register
-            onRegister={handleRegister}
-            errRespons={errResEmail} />
-        </Route>
-        <ProtectedRoute
-          component={Movies}
-          path='/movies'
-          loggedIn={loggedIn}
-          like={true ? "button__activ" : ""}
-          cards={cards}
-          onUpdateParams={handleUpdateParams}
-        />
-        <ProtectedRoute
-          component={SavedMovies}
-          path='/saved-movies'
-          loggedIn={loggedIn}
-          cards={savedCards}
-          close={true ? "button__activ" : ""}
-        />
-        <ProtectedRoute
-          component={Profile}
-          path='/profile'
-          loggedIn={loggedIn}
-          onLogout={handleLogout}
-        />
-        <Route path='/not-found'>
-          <PageNotFound />
-        </Route>
-      </Switch>
-      <PopupWithNavigation
-        isOpen={false ? "popup_is-opened" : ""} />
+      <CurrentUserContext.Provider value={currentUser}>
+        <Switch>
+          <Route exact path='/'>
+            <Main
+              headerBackground={'header__background'} />
+          </Route>
+          <Route path='/signin'>
+            <Login
+              onLogin={handleLogin}
+              tokenCheck={tokenCheck}
+              errRespons={errResIncorrect} />
+          </Route>
+          <Route path='/signup'>
+            <Register
+              onRegister={handleRegister}
+              errRespons={errResEmail} />
+          </Route>
+          <ProtectedRoute
+            component={Movies}
+            path='/movies'
+            loggedIn={loggedIn}
+            like={true ? "button__activ" : ""}
+            cards={cards}
+            onUpdateParams={handleUpdateParams}
+          />
+          <ProtectedRoute
+            component={SavedMovies}
+            path='/saved-movies'
+            loggedIn={loggedIn}
+            cards={savedCards}
+            close={true ? "button__activ" : ""}
+          />
+          <ProtectedRoute
+            component={Profile}
+            path='/profile'
+            loggedIn={loggedIn}
+            onUpdateUser={handleUpdateUser}
+            errRespons={errResIncorrect}
+            onLogout={handleLogout}
+          />
+          <Route path='/not-found'>
+            <PageNotFound />
+          </Route>
+        </Switch>
+        <PopupWithNavigation
+          isOpen={false ? "popup_is-opened" : ""} />
+      </CurrentUserContext.Provider>
     </div>
   );
 }

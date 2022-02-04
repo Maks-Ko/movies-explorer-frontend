@@ -2,12 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import PageWithForm from '../PageWithForm/PageWithForm';
 import './Register.css'
 
-function validator() {
-    // true есть оштбка
-    // false корректные данные
-
-}
-
 const validators = {
     userName: {
         required: (value) => { return value === ''; },

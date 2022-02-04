@@ -89,24 +89,6 @@ function Login(props) {
         props.onLogin({ email, password });
     }
 
-
-
-    // const [dataUser, setDataUser] =useState({
-    //     email: '',
-    //     password: '',
-    // });
-
-    // function handleChange(e) {
-    //     const { name, value } = e.target;
-    //     setDataUser({ ...dataUser, [name]: value });
-    // }
-
-    // function handleSubmit(e) {
-    //     e.preventDefault();
-    //     const { email, password } = dataUser;
-    //     props.onLogin({ email, password });
-    // }
-
     return (
         <>
             <PageWithForm
