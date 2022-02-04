@@ -59,7 +59,7 @@ class MainApi {
     getItemsMovies() {
         return fetch(`${this._baseUrl}/movies`, {
             method: 'GET',
-            headers: this._headers
+            headers: { ...this._headers, Authorization: `Bearer ${localStorage.getItem('jwt')}` },
         })
             .then(this._checkResponse)
     }

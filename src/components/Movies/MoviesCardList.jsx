@@ -13,7 +13,8 @@ function MoviesCardList(props) {
                     duration={card.duration}
                     image={card.image.url}
                     like={props.like}
-                    close={props.close} />
+                    close={props.close}
+                    key={card.id} />
                 )})}
                 
             </ul>

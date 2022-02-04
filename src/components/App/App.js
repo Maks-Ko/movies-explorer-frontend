@@ -24,11 +24,8 @@ function App() {
 
   const [cards, setCards] = useState([]);
   const [savedCards, setSavedCards] = useState([]);
-  const [local, setLocal] = useState([]); // переделать на localStorage
-
 
   const history = useHistory();
-
 
   useEffect(() => {
     if (isRegister === true) {
@@ -88,7 +85,7 @@ function App() {
   };
 
   // редактировать профиль
-  function handleUpdateUser({ name, email }) {    
+  function handleUpdateUser({ name, email }) {
     mainApi.updateUser({ name, email })
       .then((user) => {
         setCurrentUser(user.data);
@@ -102,22 +99,13 @@ function App() {
   // выход из приложения
   function handleLogout() {
     localStorage.removeItem('jwt');
+    localStorage.removeItem('moviesLocal')
     setLoggedIn(false);
   }
 
-
-
+  // получаем данные фильмах
   useEffect(() => {
     if (loggedIn) {
-      moviesApi.getMovies()
-        .then((data) => {
-          setLocal(data);
-          // localStorage.setItem('moviesLocal', data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-
       mainApi.getItemsMovies()
         .then((data) => {
           console.log(data);
@@ -125,12 +113,25 @@ function App() {
         .catch((err) => {
           console.log(err);
         });
+
+      const moviesLocal = JSON.parse(localStorage.getItem('moviesLocal'));
+      setCards(moviesLocal);
     }
+
+
   }, [loggedIn]);
 
+  // поиск фильмов
   function handleUpdateParams(props) {
-    const movies = local.filter(movie => movie.nameRU.toLowerCase().includes(props.params.toLowerCase()));
-    setCards(movies);
+    moviesApi.getMovies()
+      .then((data) => {
+        const movies = data.filter(movie => movie.nameRU.toLowerCase().includes(props.params.toLowerCase()));
+        setCards(movies);
+        localStorage.setItem('moviesLocal', JSON.stringify(movies));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
