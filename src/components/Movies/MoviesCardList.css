@@ -1,3 +1,12 @@
+.movies-list__text {
+    text-align: center;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 23px;
+    line-height: 26px;
+    color: #000000;
+}
+
 .movies-list {
     margin: 0;
     padding: 0;

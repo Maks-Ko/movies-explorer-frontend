@@ -20,8 +20,7 @@ function App() {
   const [errResEmail, setErrResEmail] = useState('');
   const [errResIncorrect, setErrResIncorrect] = useState('');
   const [currentUser, setCurrentUser] = useState({});
-
-
+  const [isPreloader, setIsPreloader] = useState(false);
   const [cards, setCards] = useState([]);
   const [savedCards, setSavedCards] = useState([]);
 
@@ -101,38 +100,86 @@ function App() {
     localStorage.removeItem('jwt');
     localStorage.removeItem('moviesLocal')
     setLoggedIn(false);
+    setCurrentUser({});
+    setCards([]);
+    setSavedCards([]);
   }
 
   // получаем данные фильмах
   useEffect(() => {
     if (loggedIn) {
-      mainApi.getItemsMovies()
+      mainApi.getMovies()
         .then((data) => {
           console.log(data);
+          setSavedCards(data.data);
+          setCards(JSON.parse(localStorage.getItem('moviesLocal')));
         })
         .catch((err) => {
           console.log(err);
         });
-
-      const moviesLocal = JSON.parse(localStorage.getItem('moviesLocal'));
-      setCards(moviesLocal);
     }
-
-
   }, [loggedIn]);
 
-  // поиск фильмов
-  function handleUpdateParams(props) {
+  //поиск фильмов
+  function searchMovies(array, params) {
+    const movies = array.filter(movie => movie.nameRU.toLowerCase().includes(params.toLowerCase()));
+    return movies;
+  }
+
+  // поиск фильмов на '/movies'
+  function handleUpdateParamsMovies(props) {
+    setIsPreloader(true);
     moviesApi.getMovies()
       .then((data) => {
-        const movies = data.filter(movie => movie.nameRU.toLowerCase().includes(props.params.toLowerCase()));
-        setCards(movies);
+        const moviesArray = data.map((movie) => {
+          return {
+            country: movie.country,
+            director: movie.director,
+            duration: movie.duration,
+            year: movie.year,
+            description: movie.description,
+            image: `https://api.nomoreparties.co${movie.image.url}`,
+            trailer: movie.trailerLink,
+            thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+            movieId: movie.id,
+            nameRU: movie.nameRU,
+            nameEN: movie.nameEN,
+          }
+        });
+
+        const movies = searchMovies(moviesArray, props.params)
         localStorage.setItem('moviesLocal', JSON.stringify(movies));
+        setCards(JSON.parse(localStorage.getItem('moviesLocal')));
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setIsPreloader(false);
       });
   }
+
+  // поиск фильмов на '/saved-movies'
+  function handleUpdateParamsSavedMovies(props) {
+    setIsPreloader(true);
+    mainApi.getMovies()
+      .then((data) => {
+        const movies = searchMovies(data.data, props.params);
+        setSavedCards(movies);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setIsPreloader(false);
+      });
+  }
+
+  // удалить фильм
+  function handleCardDelete(props) {
+    console.log(props);
+  }
+
 
   return (
     <div className="app">
@@ -157,9 +204,10 @@ function App() {
             component={Movies}
             path='/movies'
             loggedIn={loggedIn}
+            isPreloader={isPreloader ? "preloader_active" : ""}
             like={true ? "button__activ" : ""}
             cards={cards}
-            onUpdateParams={handleUpdateParams}
+            onUpdateParams={handleUpdateParamsMovies}
           />
           <ProtectedRoute
             component={SavedMovies}
@@ -167,6 +215,8 @@ function App() {
             loggedIn={loggedIn}
             cards={savedCards}
             close={true ? "button__activ" : ""}
+            onUpdateParams={handleUpdateParamsSavedMovies}
+            onCardDelete={handleCardDelete}
           />
           <ProtectedRoute
             component={Profile}

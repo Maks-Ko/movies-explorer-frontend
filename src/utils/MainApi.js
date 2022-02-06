@@ -56,12 +56,31 @@ class MainApi {
     }
 
     // получить данные сохраненных фильмов
-    getItemsMovies() {
+    getMovies() {
         return fetch(`${this._baseUrl}/movies`, {
             method: 'GET',
             headers: { ...this._headers, Authorization: `Bearer ${localStorage.getItem('jwt')}` },
         })
             .then(this._checkResponse)
+    }
+
+    // добавить фильм в сохраненные
+    addMovies() {
+        return fetch(`${this._baseUrl}/movies`, {
+            method: 'POST',
+            headers: { ...this._headers, Authorization: `Bearer ${localStorage.getItem('jwt')}` },
+        })
+            .then(this._checkResponse)
+
+    }
+
+    // удалить фильм
+    deleteMovies() {
+        return fetch(`${this._baseUrl}/movies`, {
+            method: 'DELETE',
+            headers: { ...this._headers, Authorization: `Bearer ${localStorage.getItem('jwt')}` },
+        })
+            .then(this._checkResponse)        
     }
 
     // проверка ответа

@@ -15,8 +15,9 @@ function Movies(props) {
                 <SearhForm
                     onUpdateParams={props.onUpdateParams} />
                 <MoviesCardList
-                    like={props.like}
-                    cards={props.cards} />
+                    cards={props.cards}
+                    isPreloader={props.isPreloader}
+                    like={props.like} />
                 <PreloaderMore />
             </main>
             <Footer />
