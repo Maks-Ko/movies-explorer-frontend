@@ -65,22 +65,23 @@ class MainApi {
     }
 
     // добавить фильм в сохраненные
-    addMovies() {
+    addMovies(card) {
         return fetch(`${this._baseUrl}/movies`, {
             method: 'POST',
             headers: { ...this._headers, Authorization: `Bearer ${localStorage.getItem('jwt')}` },
+            body: JSON.stringify(card)
         })
             .then(this._checkResponse)
 
     }
 
     // удалить фильм
-    deleteMovies() {
-        return fetch(`${this._baseUrl}/movies`, {
+    deleteMovies(idCard) {
+        return fetch(`${this._baseUrl}/movies/${idCard}`, {
             method: 'DELETE',
             headers: { ...this._headers, Authorization: `Bearer ${localStorage.getItem('jwt')}` },
         })
-            .then(this._checkResponse)        
+            .then(this._checkResponse)
     }
 
     // проверка ответа

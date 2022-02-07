@@ -17,7 +17,10 @@ function Movies(props) {
                 <MoviesCardList
                     cards={props.cards}
                     isPreloader={props.isPreloader}
-                    like={props.like} />
+                    isNotFound={props.isNotFound}
+                    buttonLike={props.buttonLike}
+                    onCardSaved={props.onCardSaved}
+                    savedCards={props.savedCards} />
                 <PreloaderMore />
             </main>
             <Footer />

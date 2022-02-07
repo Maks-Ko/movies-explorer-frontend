@@ -10,13 +10,13 @@ function SavedMovies(props) {
             <Header
                 loggedIn={props.loggedIn} />
             <main className="saved-movies">
-                <SearhForm
+                <SearhForm 
                     onUpdateParams={props.onUpdateParams} />
                 <MoviesCardList
                     cards={props.cards}
-                    close={props.close}
-                    onCardDelete={props.onCardDelete}
-                />
+                    isNotFound={props.isNotFound}
+                    buttonDelete={props.buttonDelete}
+                    onCardDelete={props.onCardDelete} />
                 <div className="saved-movies__block"></div>
             </main>
             <Footer />

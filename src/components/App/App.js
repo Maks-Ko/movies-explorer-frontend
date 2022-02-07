@@ -23,6 +23,8 @@ function App() {
   const [isPreloader, setIsPreloader] = useState(false);
   const [cards, setCards] = useState([]);
   const [savedCards, setSavedCards] = useState([]);
+  const [moviesNotFound, setMoviesNotFound] = useState(false);
+  const [moviesSavedNotFound, setMoviesSavedNotFound] = useState(false);
 
   const history = useHistory();
 
@@ -110,9 +112,11 @@ function App() {
     if (loggedIn) {
       mainApi.getMovies()
         .then((data) => {
-          console.log(data);
           setSavedCards(data.data);
-          setCards(JSON.parse(localStorage.getItem('moviesLocal')));
+          const movies = JSON.parse(localStorage.getItem('moviesLocal'));
+          if (movies) {
+            setCards(JSON.parse(localStorage.getItem('moviesLocal')));
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -120,7 +124,7 @@ function App() {
     }
   }, [loggedIn]);
 
-  //поиск фильмов
+  // поиск фильмов
   function searchMovies(array, params) {
     const movies = array.filter(movie => movie.nameRU.toLowerCase().includes(params.toLowerCase()));
     return movies;
@@ -128,6 +132,7 @@ function App() {
 
   // поиск фильмов на '/movies'
   function handleUpdateParamsMovies(props) {
+    setMoviesNotFound(false);
     setIsPreloader(true);
     moviesApi.getMovies()
       .then((data) => {
@@ -150,6 +155,7 @@ function App() {
         const movies = searchMovies(moviesArray, props.params)
         localStorage.setItem('moviesLocal', JSON.stringify(movies));
         setCards(JSON.parse(localStorage.getItem('moviesLocal')));
+        movies.length > 0 ? setMoviesNotFound(false) : setMoviesNotFound(true);
       })
       .catch((err) => {
         console.log(err);
@@ -161,11 +167,13 @@ function App() {
 
   // поиск фильмов на '/saved-movies'
   function handleUpdateParamsSavedMovies(props) {
+    setMoviesSavedNotFound(false);
     setIsPreloader(true);
     mainApi.getMovies()
       .then((data) => {
         const movies = searchMovies(data.data, props.params);
         setSavedCards(movies);
+        movies.length > 0 ? setMoviesSavedNotFound(false) : setMoviesSavedNotFound(true);
       })
       .catch((err) => {
         console.log(err);
@@ -175,9 +183,32 @@ function App() {
       });
   }
 
-  // удалить фильм
-  function handleCardDelete(props) {
-    console.log(props);
+  // добавить или удалить фильм
+  function handleCardSaved(data) {
+    const isSavedCard = savedCards.some((c) => c.movieId === data.card.movieId);
+    if (!isSavedCard) {
+      mainApi.addMovies(data.card)
+        .then((newCard) => {
+          setSavedCards([newCard.data, ...savedCards]);
+        })
+        .catch((err) => {
+          console.log(err); // "Что-то пошло не так: ..."
+        });
+    } else {
+      const movieDeleted = savedCards.filter((c) => c.movieId === data.card.movieId).shift();
+      handleCardDelete(movieDeleted._id);
+    }
+  }
+
+  // удалить карточку фильм из сохраненных
+  function handleCardDelete(idCard) {
+    mainApi.deleteMovies(idCard)
+      .then(() => {
+        setSavedCards((savedCards) => savedCards.filter((c) => c._id !== idCard))
+      })
+      .catch((err) => {
+        console.log(err); // "Что-то пошло не так: ..."
+      });
   }
 
 
@@ -205,16 +236,20 @@ function App() {
             path='/movies'
             loggedIn={loggedIn}
             isPreloader={isPreloader ? "preloader_active" : ""}
-            like={true ? "button__activ" : ""}
+            isNotFound={moviesNotFound}
+            buttonLike={true ? "button__activ" : ""}
             cards={cards}
             onUpdateParams={handleUpdateParamsMovies}
+            onCardSaved={handleCardSaved}
+            savedCards={savedCards}
           />
           <ProtectedRoute
             component={SavedMovies}
             path='/saved-movies'
             loggedIn={loggedIn}
             cards={savedCards}
-            close={true ? "button__activ" : ""}
+            isNotFound={moviesSavedNotFound}
+            buttonDelete={true ? "button__activ" : ""}
             onUpdateParams={handleUpdateParamsSavedMovies}
             onCardDelete={handleCardDelete}
           />
