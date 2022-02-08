@@ -27,7 +27,7 @@ function MoviesCardList(props) {
                                     key={card._id || card.movieId}
                                 />
                             )
-                        })}
+                        }).slice(0, props.moviesMore)}
                     </ul>
                 </div>}
 

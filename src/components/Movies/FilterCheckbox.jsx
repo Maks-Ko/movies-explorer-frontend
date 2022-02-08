@@ -13,8 +13,7 @@ function FilterCheckbox(props) {
     }
 
     const isChecked = localMovies();
-
-
+    
     return (
         <div className="checkbox">
             <label className="checkbox__label">

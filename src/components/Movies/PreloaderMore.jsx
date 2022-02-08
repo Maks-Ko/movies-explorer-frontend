@@ -1,9 +1,9 @@
 import './PreloaderMore.css';
 
-function PreloaderMore() {
+function PreloaderMore(props) {
     return(
         <section className="preloader-more">
-            <button className="preloader-more__button">Ещё</button>
+            <button onClick={props.onClickMore} className="preloader-more__button">Ещё</button>
         </section>
     )
 }

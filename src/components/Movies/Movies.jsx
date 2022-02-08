@@ -18,13 +18,15 @@ function Movies(props) {
                     checked={props.checked} />
                 <MoviesCardList
                     cards={props.cards}
+                    moviesMore={props.moviesMore}
                     isPreloader={props.isPreloader}
                     isNotFound={props.isNotFound}
                     isErrSearch={props.isErrSearch}
                     buttonLike={props.buttonLike}
                     onCardSaved={props.onCardSaved}
-                    savedCards={props.savedCards} />
-                <PreloaderMore />
+                    savedCards={props.savedCards}
+                    s={props.moviesIndex} />
+                {props.buttonMore && <PreloaderMore onClickMore={props.onClickMore} />}
             </main>
             <Footer />
         </>

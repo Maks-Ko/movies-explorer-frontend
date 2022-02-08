@@ -27,6 +27,10 @@ function App() {
   const [moviesNotFound, setMoviesNotFound] = useState(false);
   const [moviesSavedNotFound, setMoviesSavedNotFound] = useState(false);
   const [checked, setChecked] = useState(false);
+  const [checkedSearchMovies, setCheckedSearchMovies] = useState(false)
+  const [numberMoviesShow, setNumberMoviesShow] = useState(3);
+  const [numberMoviesMore, setNumberMoviesMore] = useState(3);  
+  const [buttonMore, setbuttonMore] = useState(true);
   const history = useHistory();
 
   useEffect(() => {
@@ -109,12 +113,14 @@ function App() {
     setSavedCards([]);
   }
 
-  // получаем данные фильмах
+  // получаем данные фильмов
   useEffect(() => {
     if (loggedIn) {
       mainApi.getMovies()
         .then((data) => {
           setSavedCards(data.data);
+          localStorage.setItem('searchMoviesLocal', JSON.stringify(data.data));
+
           const movies = JSON.parse(localStorage.getItem('moviesLocal'));
           if (movies) {
             setCards(JSON.parse(localStorage.getItem('moviesLocal')));
@@ -131,6 +137,7 @@ function App() {
     setMoviesNotFound(false);
     setIsErrSearch(false)
     setIsPreloader(true);
+    setNumberMoviesShow(numberMoviesShow);
     moviesApi.getMovies()
       .then((data) => {
         const moviesArray = data.map((movie) => {
@@ -162,9 +169,6 @@ function App() {
         setIsPreloader(false);
       });
   }
-  useEffect(() => {
-
-  })  
 
   // поиск фильмов на '/saved-movies'
   function handleUpdateParamsSavedMovies(props) {
@@ -187,7 +191,7 @@ function App() {
       });
   }
 
-  // фильтр фильмов, поиск
+  // фильтр фильмов, 'поиск'
   function searchMovies(array, params) {
     const movies = array.filter(movie => movie.nameRU.toLowerCase().includes(params.toLowerCase()));
     return movies;
@@ -197,32 +201,48 @@ function App() {
   function handleCheckedMovies() {
     const movies = JSON.parse(localStorage.getItem('moviesLocal'));
     if (!checked) {
-      const search = shortMovies(movies);
+      const search = movies ? movies.filter((c) => c.duration <= 40) : [];
       setChecked(true)
       setCards(search)
     } else {
       setChecked(false)
-      setCards(movies)
+      setCards(movies ? movies : [])
     }
   }
 
   // короткометражки на '/saved-movies'
   function handleCheckedSearchMovies() {
     const movies = JSON.parse(localStorage.getItem('searchMoviesLocal'));
-    if (!checked) {
-      const search = shortMovies(movies);
-      setChecked(true)
+    if (!checkedSearchMovies) {
+      const search = movies.filter((c) => c.duration <= 40);
+      setCheckedSearchMovies(true)
       setSavedCards(search)
     } else {
-      setChecked(false)
+      setCheckedSearchMovies(false)
       setSavedCards(movies)
     }
   }
+
+  // фильтр фильмов, 'короткометражка'
+  // function shortMovies(movies) {
+  //   return movies.filter((c) => c.duration <= 40);
+  // }
+
   
-  // фильтр фильмов, короткометражка
-  function shortMovies(movies) {
-    return movies.filter((c) => c.duration <= 40);
+
+  // добавить фильмы на страницу "ещё"
+  function handleClickMore() {
+    setNumberMoviesShow(numberMoviesShow + numberMoviesMore);
   }
+
+  useEffect(() => {
+    let isMore = cards.slice(numberMoviesShow).length;
+    if (isMore !== 0) {
+      setbuttonMore(true);
+    } else {
+      setbuttonMore(false);
+    }
+  }, [cards, numberMoviesShow])
 
   // добавить или удалить фильм
   function handleCardSaved(data) {
@@ -230,6 +250,7 @@ function App() {
     if (!isSavedCard) {
       mainApi.addMovies(data.card)
         .then((newCard) => {
+          localStorage.setItem('searchMoviesLocal', JSON.stringify([newCard.data, ...savedCards]));
           setSavedCards([newCard.data, ...savedCards]);
         })
         .catch((err) => {
@@ -285,6 +306,9 @@ function App() {
             checked={checked}
             onUpdateParams={handleUpdateParamsMovies}
             onCardSaved={handleCardSaved}
+            onClickMore={handleClickMore}
+            moviesMore={numberMoviesShow}
+            buttonMore={buttonMore}
             savedCards={savedCards}
           />
           <ProtectedRoute
@@ -293,7 +317,7 @@ function App() {
             loggedIn={loggedIn}
             cards={savedCards}
             onChecked={handleCheckedSearchMovies}
-            checked={checked}
+            checked={checkedSearchMovies}
             isNotFound={moviesSavedNotFound}
             isErrSearch={isErrSearch}
             buttonDelete={true ? "button__activ" : ""}
