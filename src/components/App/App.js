@@ -223,13 +223,6 @@ function App() {
     }
   }
 
-  // фильтр фильмов, 'короткометражка'
-  // function shortMovies(movies) {
-  //   return movies.filter((c) => c.duration <= 40);
-  // }
-
-  
-
   // добавить фильмы на страницу "ещё"
   function handleClickMore() {
     setNumberMoviesShow(numberMoviesShow + numberMoviesMore);
