@@ -13,11 +13,14 @@ function Movies(props) {
                 loggedIn={props.loggedIn} />
             <main className="movies">
                 <SearhForm
-                    onUpdateParams={props.onUpdateParams} />
+                    onUpdateParams={props.onUpdateParams}
+                    onChecked={props.onChecked}
+                    checked={props.checked} />
                 <MoviesCardList
                     cards={props.cards}
                     isPreloader={props.isPreloader}
                     isNotFound={props.isNotFound}
+                    isErrSearch={props.isErrSearch}
                     buttonLike={props.buttonLike}
                     onCardSaved={props.onCardSaved}
                     savedCards={props.savedCards} />

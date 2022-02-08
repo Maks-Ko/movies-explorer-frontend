@@ -25,7 +25,9 @@ function SearhForm(props) {
                     </button>
                 </fieldset>
             </form>
-            <FilterCheckbox />
+            <FilterCheckbox 
+            onChecked={props.onChecked}
+            checked={props.checked} />
         </section>
     )
 }

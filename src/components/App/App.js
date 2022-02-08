@@ -19,13 +19,14 @@ function App() {
   const [isRegister, setIsRegister] = useState('');
   const [errResEmail, setErrResEmail] = useState('');
   const [errResIncorrect, setErrResIncorrect] = useState('');
+  const [isErrSearch, setIsErrSearch] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [isPreloader, setIsPreloader] = useState(false);
   const [cards, setCards] = useState([]);
   const [savedCards, setSavedCards] = useState([]);
   const [moviesNotFound, setMoviesNotFound] = useState(false);
   const [moviesSavedNotFound, setMoviesSavedNotFound] = useState(false);
-
+  const [checked, setChecked] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -100,7 +101,8 @@ function App() {
   // выход из приложения
   function handleLogout() {
     localStorage.removeItem('jwt');
-    localStorage.removeItem('moviesLocal')
+    localStorage.removeItem('moviesLocal');
+    localStorage.removeItem('searchMoviesLocal');
     setLoggedIn(false);
     setCurrentUser({});
     setCards([]);
@@ -124,15 +126,10 @@ function App() {
     }
   }, [loggedIn]);
 
-  // поиск фильмов
-  function searchMovies(array, params) {
-    const movies = array.filter(movie => movie.nameRU.toLowerCase().includes(params.toLowerCase()));
-    return movies;
-  }
-
   // поиск фильмов на '/movies'
   function handleUpdateParamsMovies(props) {
     setMoviesNotFound(false);
+    setIsErrSearch(false)
     setIsPreloader(true);
     moviesApi.getMovies()
       .then((data) => {
@@ -158,6 +155,31 @@ function App() {
         movies.length > 0 ? setMoviesNotFound(false) : setMoviesNotFound(true);
       })
       .catch((err) => {
+        setIsErrSearch(true);
+        console.log(err);
+      })
+      .finally(() => {
+        setIsPreloader(false);
+      });
+  }
+  useEffect(() => {
+
+  })  
+
+  // поиск фильмов на '/saved-movies'
+  function handleUpdateParamsSavedMovies(props) {
+    setMoviesSavedNotFound(false);
+    setIsErrSearch(false);
+    setIsPreloader(true);
+    mainApi.getMovies()
+      .then((data) => {
+        const movies = searchMovies(data.data, props.params);
+        localStorage.setItem('searchMoviesLocal', JSON.stringify(movies));
+        setSavedCards(JSON.parse(localStorage.getItem('searchMoviesLocal')));
+        movies.length > 0 ? setMoviesSavedNotFound(false) : setMoviesSavedNotFound(true);
+      })
+      .catch((err) => {
+        setIsErrSearch(true);
         console.log(err);
       })
       .finally(() => {
@@ -165,22 +187,41 @@ function App() {
       });
   }
 
-  // поиск фильмов на '/saved-movies'
-  function handleUpdateParamsSavedMovies(props) {
-    setMoviesSavedNotFound(false);
-    setIsPreloader(true);
-    mainApi.getMovies()
-      .then((data) => {
-        const movies = searchMovies(data.data, props.params);
-        setSavedCards(movies);
-        movies.length > 0 ? setMoviesSavedNotFound(false) : setMoviesSavedNotFound(true);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setIsPreloader(false);
-      });
+  // фильтр фильмов, поиск
+  function searchMovies(array, params) {
+    const movies = array.filter(movie => movie.nameRU.toLowerCase().includes(params.toLowerCase()));
+    return movies;
+  }
+
+  // короткометражки на '/movies'
+  function handleCheckedMovies() {
+    const movies = JSON.parse(localStorage.getItem('moviesLocal'));
+    if (!checked) {
+      const search = shortMovies(movies);
+      setChecked(true)
+      setCards(search)
+    } else {
+      setChecked(false)
+      setCards(movies)
+    }
+  }
+
+  // короткометражки на '/saved-movies'
+  function handleCheckedSearchMovies() {
+    const movies = JSON.parse(localStorage.getItem('searchMoviesLocal'));
+    if (!checked) {
+      const search = shortMovies(movies);
+      setChecked(true)
+      setSavedCards(search)
+    } else {
+      setChecked(false)
+      setSavedCards(movies)
+    }
+  }
+  
+  // фильтр фильмов, короткометражка
+  function shortMovies(movies) {
+    return movies.filter((c) => c.duration <= 40);
   }
 
   // добавить или удалить фильм
@@ -237,8 +278,11 @@ function App() {
             loggedIn={loggedIn}
             isPreloader={isPreloader ? "preloader_active" : ""}
             isNotFound={moviesNotFound}
+            isErrSearch={isErrSearch}
             buttonLike={true ? "button__activ" : ""}
             cards={cards}
+            onChecked={handleCheckedMovies}
+            checked={checked}
             onUpdateParams={handleUpdateParamsMovies}
             onCardSaved={handleCardSaved}
             savedCards={savedCards}
@@ -248,7 +292,10 @@ function App() {
             path='/saved-movies'
             loggedIn={loggedIn}
             cards={savedCards}
+            onChecked={handleCheckedSearchMovies}
+            checked={checked}
             isNotFound={moviesSavedNotFound}
+            isErrSearch={isErrSearch}
             buttonDelete={true ? "button__activ" : ""}
             onUpdateParams={handleUpdateParamsSavedMovies}
             onCardDelete={handleCardDelete}

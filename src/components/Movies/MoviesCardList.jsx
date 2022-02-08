@@ -10,6 +10,8 @@ function MoviesCardList(props) {
                 ? <Preloader />
                 : <div>
                     {props.isNotFound && <p className="movies-list__text">Ничего не найдено.</p>}
+                    {props.isErrSearch && <p className="movies-list__text">Во время запроса произошла ошибка.
+                    Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.</p>}
                     <ul className="movies-list">
                         {props.cards.map(card => {
                             return (
