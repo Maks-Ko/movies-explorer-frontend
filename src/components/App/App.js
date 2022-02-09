@@ -68,6 +68,7 @@ function App() {
       .then((user) => {
         localStorage.setItem('jwt', user.token);
         setLoggedIn(true)
+        tokenCheck();
       })
       .catch((err) => {
         setErrResIncorrect(err)
