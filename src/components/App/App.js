@@ -112,6 +112,7 @@ function App() {
     setCurrentUser({});
     setCards([]);
     setSavedCards([]);
+    history.push('/');
   }
 
   // получаем данные фильмов
