@@ -107,7 +107,7 @@ function Profile(props) {
                     <fieldset className="form__account-container">
 
                         <span className="form__account-span">Имя
-                            <input name="userName" value={userName} onChange={handleInputChange} id="user_name" className="form__account-text" type="text" placeholder="Введите имя" requiredminlength="2" maxLength="40" />
+                            <input name="userName" value={userName || ''} onChange={handleInputChange} id="user_name" className="form__account-text" type="text" placeholder="Введите имя" requiredminlength="2" maxLength="40" />
                         </span>
                         <div className="form__block-err">
                             {errors.userName.required && <span className="form__text-err">Обязетельное поле.</span>}
