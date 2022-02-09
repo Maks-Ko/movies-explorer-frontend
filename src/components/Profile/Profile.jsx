@@ -99,7 +99,8 @@ function Profile(props) {
     return (
         <>
             <Header
-                loggedIn={props.loggedIn} />
+                loggedIn={props.loggedIn}
+                onClickOpenMenu={props.onClickOpenMenu} />
             <main className="account">
                 <h2 className="account__title">Привет, Виталий!</h2>
                 <form name="account" className="form__account" onSubmit={handleSubmit}>

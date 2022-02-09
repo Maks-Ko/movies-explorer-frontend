@@ -31,6 +31,7 @@ function App() {
   const [numberMoviesShow, setNumberMoviesShow] = useState(3);
   const [numberMoviesMore, setNumberMoviesMore] = useState(3);  
   const [buttonMore, setbuttonMore] = useState(true);
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -266,6 +267,18 @@ function App() {
       });
   }
 
+  function handleClickOpenMenu() {
+    setIsOpenMenu(true);
+  }
+
+  function handleClickCloseMenu() {
+    setIsOpenMenu(false)
+  }
+
+  useEffect(() => {
+    setIsOpenMenu(false);
+  }, [history]);
+
 
   return (
     <div className="app">
@@ -303,6 +316,7 @@ function App() {
             moviesMore={numberMoviesShow}
             buttonMore={buttonMore}
             savedCards={savedCards}
+            onClickOpenMenu={handleClickOpenMenu}
           />
           <ProtectedRoute
             component={SavedMovies}
@@ -316,6 +330,7 @@ function App() {
             buttonDelete={true ? "button__activ" : ""}
             onUpdateParams={handleUpdateParamsSavedMovies}
             onCardDelete={handleCardDelete}
+            onClickOpenMenu={handleClickOpenMenu}
           />
           <ProtectedRoute
             component={Profile}
@@ -324,13 +339,15 @@ function App() {
             onUpdateUser={handleUpdateUser}
             errRespons={errResIncorrect}
             onLogout={handleLogout}
+            onClickOpenMenu={handleClickOpenMenu}
           />
           <Route path='/not-found'>
             <PageNotFound />
           </Route>
         </Switch>
         <PopupWithNavigation
-          isOpen={false ? "popup_is-opened" : ""} />
+          isOpenMenu={isOpenMenu ? "popup_is-opened" : ""}
+          onClickCloseMenu={handleClickCloseMenu} />
       </CurrentUserContext.Provider>
     </div>
   );

@@ -10,7 +10,8 @@ function Movies(props) {
     return (
         <>
             <Header
-                loggedIn={props.loggedIn} />
+                loggedIn={props.loggedIn}
+                onClickOpenMenu={props.onClickOpenMenu} />
             <main className="movies">
                 <SearhForm
                     onUpdateParams={props.onUpdateParams}

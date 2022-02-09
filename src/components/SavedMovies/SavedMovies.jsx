@@ -8,7 +8,8 @@ function SavedMovies(props) {
     return (
         <>
             <Header
-                loggedIn={props.loggedIn} />
+                loggedIn={props.loggedIn}
+                onClickOpenMenu={props.onClickOpenMenu} />
             <main className="saved-movies">
                 <SearhForm 
                     onUpdateParams={props.onUpdateParams}
