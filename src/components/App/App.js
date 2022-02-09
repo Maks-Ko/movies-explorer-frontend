@@ -66,6 +66,7 @@ function App() {
   function handleLogin({ email, password }) {
     mainApi.authUser({ email, password })
       .then((user) => {
+        setCurrentUser(user.data);
         localStorage.setItem('jwt', user.token);
         setLoggedIn(true)
       })
