@@ -1,6 +1,6 @@
 class MainApi {
     constructor() {
-        this._baseUrl = 'http://mavko.movies.nomoredomains.rocks';
+        this._baseUrl = 'http://api.mavko.movies.nomoredomains.rocks';
         this._headers = {
             'Content-Type': 'application/json',
             'Accept': 'application/json',

@@ -6,7 +6,7 @@ import './Profile.css'
 const validators = {
     userName: {
         required: (value) => { return value === ''; },
-        minlength: (value) => { return value.length < 2; },
+        minlength: (value) => { return value === '' ? value : value.length < 2; },
     },
     email: {
         required: (value) => { return value === ''; },

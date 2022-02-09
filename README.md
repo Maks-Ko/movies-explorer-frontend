@@ -1,1 +1,8 @@
-# movies-explorer-frontend
+# Учебный проект Яндекс Практикума
+## Сервис, в котором можно найти фильмы по запросу и сохранить в личном кабинете.
+
+### Репозиторий содержит фронтенд сервиса
+
+Ссылка на сайт http://mavko.movies.nomoredomains.rocks/
+
+Бэкенд сервиса https://github.com/Maks-Ko/movies-explorer-frontend
