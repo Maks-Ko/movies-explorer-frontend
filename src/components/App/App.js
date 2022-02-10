@@ -47,8 +47,8 @@ function App() {
   useEffect(() => {
     if (loggedIn === true) {
       history.push('/movies');
-    }
-  }, [loggedIn, history])
+    }    
+  }, [loggedIn, history]);
 
   // регистрация пользователя
   function handleRegister({ userName, email, password }) {
@@ -135,7 +135,7 @@ function App() {
           const moviesCurrentUser = data.data.filter((c) => c.owner === currentUser._id);
           const moviesSearchLocalChecked = JSON.parse(localStorage.getItem('moviesSearchLocalChecked'));
 
-          if (!checkedSearchMovies) {   
+          if (!checkedSearchMovies) {
             setSavedCards(moviesCurrentUser);
             localStorage.setItem('searchMoviesLocal', JSON.stringify(moviesCurrentUser));
           } else if (checkedSearchMovies && moviesSearchLocalChecked) {
@@ -205,7 +205,7 @@ function App() {
     setIsPreloader(true);
     mainApi.getMovies()
       .then((data) => {
-        const moviesCurrentUser = data.data.filter((c) => c.owner === currentUser._id);        
+        const moviesCurrentUser = data.data.filter((c) => c.owner === currentUser._id);
         const movies = searchMovies(moviesCurrentUser, props.params);
         localStorage.setItem('searchMoviesLocal', JSON.stringify(movies));
         setSavedCards(JSON.parse(localStorage.getItem('searchMoviesLocal')));
