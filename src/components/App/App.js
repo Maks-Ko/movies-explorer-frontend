@@ -288,7 +288,8 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <Main
-              headerBackground={'header__background'} />
+              headerBackground={'header__background'}
+              loggedIn={loggedIn} />
           </Route>
           <Route path='/signin'>
             <Login
