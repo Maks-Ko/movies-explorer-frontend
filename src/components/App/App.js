@@ -132,16 +132,19 @@ function App() {
     if (loggedIn) {
       mainApi.getMovies()
         .then((data) => {
+          const moviesCurrentUser = data.data.filter((c) => c.owner === currentUser._id);
           const moviesSearchLocalChecked = JSON.parse(localStorage.getItem('moviesSearchLocalChecked'));
-          if (!checkedSearchMovies) {
-            setSavedCards(data.data);
-            localStorage.setItem('searchMoviesLocal', JSON.stringify(data.data));
+
+          if (!checkedSearchMovies) {   
+            setSavedCards(moviesCurrentUser);
+            localStorage.setItem('searchMoviesLocal', JSON.stringify(moviesCurrentUser));
           } else if (checkedSearchMovies && moviesSearchLocalChecked) {
             setSavedCards(moviesSearchLocalChecked);
           }
 
           const movies = JSON.parse(localStorage.getItem('moviesLocal'));
           const moviesChecked = JSON.parse(localStorage.getItem('moviesLocalChecked'));
+
           if (!checked && movies) {
             setCards(movies);
           } else if (checked && moviesChecked) {
@@ -152,7 +155,7 @@ function App() {
           console.log(err);
         });
     }
-  }, [loggedIn, checked, checkedSearchMovies]);
+  }, [loggedIn, checked, checkedSearchMovies, currentUser]);
 
   // поиск фильмов на '/movies'
   function handleUpdateParamsMovies(props) {
@@ -202,7 +205,8 @@ function App() {
     setIsPreloader(true);
     mainApi.getMovies()
       .then((data) => {
-        const movies = searchMovies(data.data, props.params);
+        const moviesCurrentUser = data.data.filter((c) => c.owner === currentUser._id);        
+        const movies = searchMovies(moviesCurrentUser, props.params);
         localStorage.setItem('searchMoviesLocal', JSON.stringify(movies));
         setSavedCards(JSON.parse(localStorage.getItem('searchMoviesLocal')));
         movies.length > 0 ? setMoviesSavedNotFound(false) : setMoviesSavedNotFound(true);
