@@ -1,21 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router';
 import FilterCheckbox from './FilterCheckbox';
 import search from '../../images/find.svg';
 import './SearchForm.css';
 
 function SearhForm(props) {
-    const [ params, setparams ] = React.useState('');
+    const [params, setParams] = useState('');
+    const location = useLocation();
+
+    useEffect(() => {
+        const paramsLocal = localStorage.getItem('params')
+        if (paramsLocal && location.pathname === '/movies') {
+            setParams(paramsLocal);
+        }
+    }, [location]);
 
     function handleChangeParams(e) {
-        setparams(e.target.value);
+        setParams(e.target.value);
     }
 
     function handleSubmit(e) {
         e.preventDefault();
-        props.onUpdateParams({ params });                        
+        props.onUpdateParams({ params });
     }
 
-    return(
+    return (
         <section className="searh-form">
             <form onSubmit={handleSubmit} name="movie" id="movie" className="form__searh">
                 <fieldset className="form__searh-elements">
@@ -25,9 +34,9 @@ function SearhForm(props) {
                     </button>
                 </fieldset>
             </form>
-            <FilterCheckbox 
-            onChecked={props.onChecked}
-            checked={props.checked} />
+            <FilterCheckbox
+                onChecked={props.onChecked}
+                checked={props.checked} />
         </section>
     )
 }

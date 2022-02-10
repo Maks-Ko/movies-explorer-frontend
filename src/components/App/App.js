@@ -29,7 +29,7 @@ function App() {
   const [checked, setChecked] = useState(false);
   const [checkedSearchMovies, setCheckedSearchMovies] = useState(false)
   const [numberMoviesShow, setNumberMoviesShow] = useState(3);
-  const [numberMoviesMore, setNumberMoviesMore] = useState(3);  
+  const [numberMoviesMore, setNumberMoviesMore] = useState(3);
   const [buttonMore, setbuttonMore] = useState(true);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const history = useHistory();
@@ -109,10 +109,17 @@ function App() {
     localStorage.removeItem('jwt');
     localStorage.removeItem('moviesLocal');
     localStorage.removeItem('searchMoviesLocal');
+    localStorage.removeItem('params');
+    localStorage.removeItem('checked');
+    localStorage.removeItem('checkedSearch');
+    localStorage.removeItem('moviesLocalChecked');
+    localStorage.removeItem('moviesSearchLocalChecked');
     setLoggedIn(false);
     setCurrentUser({});
     setCards([]);
     setSavedCards([]);
+    setChecked(false);
+    setCheckedSearchMovies(false);
     history.push('/');
   }
 
@@ -121,19 +128,28 @@ function App() {
     if (loggedIn) {
       mainApi.getMovies()
         .then((data) => {
-          setSavedCards(data.data);
-          localStorage.setItem('searchMoviesLocal', JSON.stringify(data.data));
+          const moviesSearchLocalChecked = JSON.parse(localStorage.getItem('moviesSearchLocalChecked'))
+
+          if (!checkedSearchMovies) {
+            setSavedCards(data.data);
+            localStorage.setItem('searchMoviesLocal', JSON.stringify(data.data));
+          } else if (checkedSearchMovies && moviesSearchLocalChecked) {
+            setSavedCards(moviesSearchLocalChecked);
+          }
 
           const movies = JSON.parse(localStorage.getItem('moviesLocal'));
-          if (movies) {
-            setCards(JSON.parse(localStorage.getItem('moviesLocal')));
+          const moviesChecked = JSON.parse(localStorage.getItem('moviesLocalChecked'));
+          if (!checked && movies) {
+            setCards(movies);
+          } else if (checked && moviesChecked) {
+            setCards(moviesChecked);
           }
         })
         .catch((err) => {
           console.log(err);
         });
     }
-  }, [loggedIn]);
+  }, [loggedIn, checked, checkedSearchMovies]);
 
   // поиск фильмов на '/movies'
   function handleUpdateParamsMovies(props) {
@@ -160,6 +176,9 @@ function App() {
         });
 
         const movies = searchMovies(moviesArray, props.params)
+
+        localStorage.setItem('params', props.params);
+
         localStorage.setItem('moviesLocal', JSON.stringify(movies));
         setCards(JSON.parse(localStorage.getItem('moviesLocal')));
         movies.length > 0 ? setMoviesNotFound(false) : setMoviesNotFound(true);
@@ -204,27 +223,50 @@ function App() {
   function handleCheckedMovies() {
     const movies = JSON.parse(localStorage.getItem('moviesLocal'));
     if (!checked) {
+      console.log(checked)
       const search = movies ? movies.filter((c) => c.duration <= 40) : [];
-      setChecked(true)
+      localStorage.setItem('checked', JSON.stringify(true));
+      setChecked(true);
+      localStorage.setItem('moviesLocalChecked', JSON.stringify(search));
       setCards(search)
     } else {
       setChecked(false)
+      localStorage.setItem('checked', JSON.stringify(false));
       setCards(movies ? movies : [])
     }
   }
+
+  useEffect(() => {
+    const checkedLocal = JSON.parse(localStorage.getItem('checked'));
+    console.log(checkedLocal);
+    if (checkedLocal) {
+      setChecked(checkedLocal);
+    }
+  }, []);
 
   // короткометражки на '/saved-movies'
   function handleCheckedSearchMovies() {
     const movies = JSON.parse(localStorage.getItem('searchMoviesLocal'));
     if (!checkedSearchMovies) {
       const search = movies.filter((c) => c.duration <= 40);
+      localStorage.setItem('checkedSearch', JSON.stringify(true));
       setCheckedSearchMovies(true)
+      localStorage.setItem('moviesSearchLocalChecked', JSON.stringify(search));
       setSavedCards(search)
     } else {
+      localStorage.setItem('checkedSearch', JSON.stringify(false));
       setCheckedSearchMovies(false)
       setSavedCards(movies)
     }
   }
+
+  useEffect(() => {
+    const checkedLocal = JSON.parse(localStorage.getItem('checkedSearch'));
+    console.log(checkedLocal);
+    if (checkedLocal) {
+      setCheckedSearchMovies(checkedLocal);
+    }
+  }, []);
 
   // добавить фильмы на страницу "ещё"
   function handleClickMore() {
