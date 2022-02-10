@@ -23,7 +23,7 @@ function MoviesCard({ card, ...props }) {
 
     return (
         <li className="card">
-            <img className="cadr__photo" src={`${card.image}`} alt="фото фильма" />
+            <a href={card.trailer} target="_blank"><img className="cadr__photo" src={`${card.image}`} alt="фото фильма" /></a>
             <div className="card__lable">
                 <div className="card__lable-text">
                     <p className="card__title">{card.nameRU}</p>

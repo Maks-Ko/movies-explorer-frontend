@@ -36,7 +36,7 @@ function App() {
 
   useEffect(() => {
     if (isRegister === true) {
-      history.push('/signin');
+      history.push('/movies');
     }
   }, [isRegister, history]);
 
@@ -53,8 +53,12 @@ function App() {
   // регистрация пользователя
   function handleRegister({ userName, email, password }) {
     mainApi.createUser({ userName, email, password })
-      .then((data) => {
+      .then((data => mainApi.authUser({ email, password })))
+      .then((user) => {
+        localStorage.setItem('jwt', user.token);
         setIsRegister(true);
+        setLoggedIn(true)
+        tokenCheck();
       })
       .catch((err) => {
         setErrResEmail(err);
@@ -128,8 +132,7 @@ function App() {
     if (loggedIn) {
       mainApi.getMovies()
         .then((data) => {
-          const moviesSearchLocalChecked = JSON.parse(localStorage.getItem('moviesSearchLocalChecked'))
-
+          const moviesSearchLocalChecked = JSON.parse(localStorage.getItem('moviesSearchLocalChecked'));
           if (!checkedSearchMovies) {
             setSavedCards(data.data);
             localStorage.setItem('searchMoviesLocal', JSON.stringify(data.data));
@@ -223,7 +226,6 @@ function App() {
   function handleCheckedMovies() {
     const movies = JSON.parse(localStorage.getItem('moviesLocal'));
     if (!checked) {
-      console.log(checked)
       const search = movies ? movies.filter((c) => c.duration <= 40) : [];
       localStorage.setItem('checked', JSON.stringify(true));
       setChecked(true);
@@ -238,7 +240,6 @@ function App() {
 
   useEffect(() => {
     const checkedLocal = JSON.parse(localStorage.getItem('checked'));
-    console.log(checkedLocal);
     if (checkedLocal) {
       setChecked(checkedLocal);
     }
@@ -262,7 +263,6 @@ function App() {
 
   useEffect(() => {
     const checkedLocal = JSON.parse(localStorage.getItem('checkedSearch'));
-    console.log(checkedLocal);
     if (checkedLocal) {
       setCheckedSearchMovies(checkedLocal);
     }

@@ -102,7 +102,7 @@ function Profile(props) {
                 loggedIn={props.loggedIn}
                 onClickOpenMenu={props.onClickOpenMenu} />
             <main className="account">
-                <h2 className="account__title">Привет, Виталий!</h2>
+                <h2 className="account__title">{`Привет, ${currentUser.name}!`}</h2>
                 <form name="account" className="form__account" onSubmit={handleSubmit}>
                     <fieldset className="form__account-container">
 
