@@ -47,18 +47,23 @@ function App() {
   useEffect(() => {
     if (loggedIn === true) {
       history.push('/movies');
-    }    
+    }
   }, [loggedIn, history]);
 
   // регистрация пользователя
   function handleRegister({ userName, email, password }) {
     mainApi.createUser({ userName, email, password })
-      .then((data => mainApi.authUser({ email, password })))
-      .then((user) => {
-        localStorage.setItem('jwt', user.token);
-        setIsRegister(true);
-        setLoggedIn(true)
-        tokenCheck();
+      .then((data) => {
+        mainApi.authUser({ email, password })
+          .then((user) => {
+            localStorage.setItem('jwt', user.token);
+            setIsRegister(true);
+            setLoggedIn(true)
+            tokenCheck();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
         setErrResEmail(err);
