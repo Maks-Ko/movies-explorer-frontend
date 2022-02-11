@@ -340,7 +340,8 @@ function App() {
           <Route exact path='/'>
             <Main
               headerBackground={'header__background'}
-              loggedIn={loggedIn} />
+              loggedIn={loggedIn}
+              onClickOpenMenu={handleClickOpenMenu} />
           </Route>
           <Route path='/signin'>
             <Login
