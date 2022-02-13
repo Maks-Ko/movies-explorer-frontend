@@ -8,11 +8,19 @@ function SavedMovies(props) {
     return (
         <>
             <Header
-                loggedIn={props.loggedIn} />
+                loggedIn={props.loggedIn}
+                onClickOpenMenu={props.onClickOpenMenu} />
             <main className="saved-movies">
-                <SearhForm />
+                <SearhForm 
+                    onUpdateParams={props.onUpdateParams}
+                    onChecked={props.onChecked}
+                    checked={props.checked} />
                 <MoviesCardList
-                    close={props.close} />
+                    cards={props.cards}
+                    isNotFound={props.isNotFound}
+                    isErrSearch={props.isErrSearch}
+                    buttonDelete={props.buttonDelete}
+                    onCardDelete={props.onCardDelete} />
                 <div className="saved-movies__block"></div>
             </main>
             <Footer />

@@ -6,12 +6,13 @@ import './Header.css';
 
 function Header(props) {
     return (
-        <header className={`header ${props.loggedIn ? "header__background" : ""}`}>
+        <header className={`header ${props.headerBackground }`}>
             <Link to="/">
                 <img src={logo} alt="логотип" className="header__logo" />
             </Link>
             {props.loggedIn ?
-                <Navigation /> :
+                <Navigation
+                onClickOpenMenu={props.onClickOpenMenu} /> :
                 <nav className="header__navigation">
                     <Link to="/signup" className="header__link">Регистрация</Link>
                     <Link to="/signin" className="header__link">Войти</Link>

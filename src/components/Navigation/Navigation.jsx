@@ -18,7 +18,7 @@ function Navigation(props) {
                     <div className="img-account"><img className="img" src={account} alt="аккаунт" /></div>
                 </NavLink>
             </nav>
-            <button className="dropbtn">
+            <button onClick={props.onClickOpenMenu} className="dropbtn">
                 <img src={menu} alt="меню" />
             </button>
         </>

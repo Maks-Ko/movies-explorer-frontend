@@ -10,10 +10,10 @@ function PageWithForm(props) {
                 <img src={logo} alt="логотип" className="page-form__logo" />
             </Link>
             <h1 className="page-form__title">{props.title}</h1>
-            <form name="register" className="form" onSubmit="">
+            <form name="register" className="form" onSubmit={props.onSubmit}>
                 <fieldset className="form__container">
-                    {props.children}
-                    <button type="submit" className="form__button">{props.textButton}</button>
+                    {props.children}                    
+                    <button type="submit" disabled={props.isSubmitDisabled} className={`form__button ${props.isbuttonDisabled}`}>{props.textButton}</button>
                 </fieldset>
             </form>
             <p className="page-form__text">{props.text} <Link to={props.link} className="page-form__linl">{props.linkText}</Link></p>

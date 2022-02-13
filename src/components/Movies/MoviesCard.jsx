@@ -1,18 +1,37 @@
+import React from 'react';
+import { useLocation } from 'react-router';
 import './MoviesCard.css'
-import photo from '../../images/pic__COLOR_pic.png';
 
-function MoviesCard(props) {
-    return(
+function MoviesCard({ card, ...props }) {
+    const location = useLocation();
+
+    // постновка и удаление лайка
+    function likeCard() {
+        if (location.pathname === '/movies') {
+            return props.savedCards.some((c) => c.movieId === card.movieId);
+        }
+    }
+    const isLikedCard = likeCard();
+
+    function handleCardSaved() {
+        props.onCardSaved({ card, ...props });
+    }
+
+    function handleDeleteClick() {
+        props.onCardDelete(card._id);
+    }
+
+    return (
         <li className="card">
-            <img className="cadr__photo" src={photo} alt="фото фильма" />
+            <a href={card.trailer} target="_blank"><img className="cadr__photo" src={`${card.image}`} alt="фото фильма" /></a>
             <div className="card__lable">
                 <div className="card__lable-text">
-                    <p className="card__title">33 слова о дизайне</p>
-                    <button className={`card__button ${props.like} card__button_status_like card__button_status_like-active`}></button>
-                    <button className={`card__button ${props.close} card__button_status_close`}></button>
+                    <p className="card__title">{card.nameRU}</p>
+                    <button onClick={handleCardSaved} className={`card__button ${props.buttonLike} card__button_status_like ${isLikedCard ? "card__button_status_like-active" : ""}`}></button>
+                    <button onClick={handleDeleteClick} className={`card__button ${props.buttonDelete} card__button_status_close`}></button>
                 </div>
-                <p className="card__duration">1ч 21м</p>                                
-            </div>           
+                <p className="card__duration">{`${card.duration} м`}</p>
+            </div>
         </li>
     )
 }

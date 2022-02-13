@@ -27,7 +27,7 @@
 }
 
 .form__text-span {
-    margin-bottom: 10px;
+    margin: 20px 0 10px;
     font-style: normal;
     font-weight: normal;
     font-size: 10px;
@@ -36,7 +36,7 @@
 }
 
 .form__text-input {
-    margin-bottom: 20px;
+    margin: 0;
     padding: 15px;
     border: none;
     background: #F9F9F9;
@@ -49,7 +49,7 @@
 }
 
 .form__button {
-    margin: 70px 0 16px;
+    margin: 0 0 16px;
     padding: 13px 0 15px;
     background-color: #000000;
     border: none;
@@ -62,6 +62,11 @@
     cursor: pointer;
 }
 
+.form__button_is-disabled {
+    background-color: #A0A0A0;
+    cursor: auto;
+}
+
 .page-form__text {
     margin: 0 0 70px;
     font-style: normal;
@@ -70,6 +75,31 @@
     line-height: 17px;
     text-align: center;
     color: #A0A0A0;
+}
+
+.form__block-errors {
+    display: flex;
+    margin-top: 10px;
+}
+
+.form__block-errors_button{
+    display: flex;
+    flex-direction: column;
+    margin: 70px 0 16px;
+}
+
+.form__text-error {
+    margin: 0 5px 0 0;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 12px;
+    color: #FF4062;
+}
+
+.form__text-error_button {
+    margin: 0 0 15px 0;
+    text-align: center;
 }
 
 .page-form__linl {

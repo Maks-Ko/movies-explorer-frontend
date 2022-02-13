@@ -13,7 +13,9 @@ function Main(props) {
     return (
         <>
             <Header
-                loggedIn={props.loggedIn} />
+                loggedIn={props.loggedIn}
+                headerBackground={props.headerBackground}
+                onClickOpenMenu={props.onClickOpenMenu} />
             <main className="main">
                 <Promo />
                 <NavTab />
